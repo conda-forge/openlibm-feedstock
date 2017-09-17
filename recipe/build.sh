@@ -22,5 +22,5 @@ then
     export USECLANG=0
 fi
 
-make
+make prefix="${PREFIX}/"
 make install prefix="${PREFIX}/"
