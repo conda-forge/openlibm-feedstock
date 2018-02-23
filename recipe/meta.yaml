@@ -1,6 +1,6 @@
 {% set name = "openlibm" %}
-{% set version = "0.5.4" %}
-{% set sha256 = "9a8ae1d17825a4a6a4c013d36a7f4348b27c47eedb6549c521ecc9c79d021c13" %}
+{% set version = "0.5.5" %}
+{% set sha256 = "07dcc5f59e695fb45167c81406b8e201c5ad91ebf24e3e55ae13298670910cfd" %}
 
 package:
   name: {{ name|lower }}
