@@ -1,0 +1,29 @@
+From f02f60250eeea79d758d7d2fcb66c442bf707ab3 Mon Sep 17 00:00:00 2001
+From: Sylvain Corlay <sylvain.corlay@gmail.com>
+Date: Thu, 25 Oct 2018 14:58:36 +0200
+Subject: [PATCH] no-CC-override
+
+---
+ Make.inc | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/Make.inc b/Make.inc
+index b7903cc..25465ce 100644
+--- a/Make.inc
++++ b/Make.inc
+@@ -35,12 +35,10 @@ AR = ar
+ 
+ ifeq ($(USECLANG),1)
+ USEGCC = 0
+-CC = clang
+ CFLAGS_add += -fno-builtin
+ endif
+ 
+ ifeq ($(USEGCC),1)
+-CC = gcc
+ CFLAGS_add += -fno-gnu89-inline -fno-builtin
+ endif
+ 
+-- 
+2.18.0
+

@@ -10,14 +10,17 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/JuliaLang/openlibm/archive/v{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    - 0001-no-CC-override.patch
 
 build:
-  number: 0
+  number: 1000
   skip: true  # [win]
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler("c") }}
+  host:
 
 test:
   commands:
@@ -36,3 +39,4 @@ extra:
   recipe-maintainers:
     - dfornika
     - jakirkham
+    - SylvainCorlay
