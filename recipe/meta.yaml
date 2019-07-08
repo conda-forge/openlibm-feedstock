@@ -14,19 +14,26 @@ source:
     - 0001-no-CC-override.patch
 
 build:
-  number: 1000
-  skip: true  # [win]
+  number: 1001
 
 requirements:
   build:
-    - {{ compiler("c") }}
+    - {{ compiler("c") }}  # [not win]
+    - {{ compiler("m2w64_c") }}  # [win]
   host:
 
 test:
+  requires:  # [win]
+    - {{ compiler("c") }}  # [win]
+  files:  # [win]
+    - test_openlibm_win.c  # [win]
   commands:
     - test -d "${PREFIX}/include/openlibm"                            # [unix]
     - test -f "${PREFIX}/lib/libopenlibm.a"                           # [unix]
     - test -f "${PREFIX}/lib/libopenlibm${SHLIB_EXT}"                 # [unix]
+    - echo on  # [win]
+    - cl /Tc test_win.c /I %CONDA_PREFIX%\Library\include\openlibm /link /LIBPATH:"%CONDA_PREFIX%\Library\lib" libopenlibm_static.lib /out:test_openlibm_win.exe  # [win]
+    - test_openlibm_win.exe  # [win]
 
 about:
   home: http://openlibm.org/
