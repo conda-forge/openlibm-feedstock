@@ -15,6 +15,7 @@ source:
 
 build:
   number: 1001
+  skip: true  # [vc<14]
 
 requirements:
   build:
@@ -32,7 +33,7 @@ test:
     - test -f "${PREFIX}/lib/libopenlibm.a"                           # [unix]
     - test -f "${PREFIX}/lib/libopenlibm${SHLIB_EXT}"                 # [unix]
     - echo on  # [win]
-    - cl /Tc test_win.c /I %CONDA_PREFIX%\Library\include\openlibm /link /LIBPATH:"%CONDA_PREFIX%\Library\lib" libopenlibm_static.lib /out:test_openlibm_win.exe  # [win]
+    - cl /Tc test_openlibm_win.c /I %CONDA_PREFIX%\Library\include\openlibm /link /LIBPATH:"%CONDA_PREFIX%\Library\lib" libopenlibm_static.lib /out:test_openlibm_win.exe  # [win]
     - test_openlibm_win.exe  # [win]
 
 about:
