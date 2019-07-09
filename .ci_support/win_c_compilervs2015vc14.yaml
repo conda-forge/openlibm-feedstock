@@ -6,3 +6,11 @@ channel_targets:
 - conda-forge main
 m2w64_c_compiler:
 - m2w64-toolchain
+pin_run_as_build:
+  vc:
+    max_pin: x
+vc:
+- '14'
+zip_keys:
+- - vc
+  - c_compiler
