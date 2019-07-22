@@ -39,7 +39,7 @@ test:
     - echo on  # [win]
     - cl /Tc test_openlibm.c /I %CONDA_PREFIX%\Library\include\openlibm /link /LIBPATH:"%CONDA_PREFIX%\Library\lib" libopenlibm_static.lib /out:test_openlibm.exe  # [win]
     - test_openlibm.exe  # [win]
-    - ${CC} -o test_openlibm test_openlibm.c -I${CONDA_PREFIX}/include/openlibm -L${CONDA_PREFIX}/lib -lopenlibm ${CFLAGS}  # [unix]
+    - ${CC} -o test_openlibm test_openlibm.c -I${CONDA_PREFIX}/include/openlibm -L${CONDA_PREFIX}/lib -lopenlibm ${CFLAGS} ${LDFLAGS}  # [unix]
     - ./test_openlibm  # [unix]
 
 about:
