@@ -14,19 +14,33 @@ source:
     - 0001-no-CC-override.patch
 
 build:
-  number: 1000
-  skip: true  # [win]
+  number: 1001
+  skip: true  # [win and vc<14]
 
 requirements:
   build:
-    - {{ compiler("c") }}
+    - {{ compiler("c") }}  # [not win]
+    - {{ compiler("m2w64_c") }}  # [win]
   host:
 
 test:
+  requires:
+    - {{ compiler("c") }}
+  files:
+    - test_openlibm.c
   commands:
-    - test -d "${PREFIX}/include/openlibm"                            # [unix]
-    - test -f "${PREFIX}/lib/libopenlibm.a"                           # [unix]
-    - test -f "${PREFIX}/lib/libopenlibm${SHLIB_EXT}"                 # [unix]
+    - test -d "${PREFIX}/include/openlibm"                         # [unix]
+    - test -f "${PREFIX}/lib/libopenlibm.a"                        # [unix]
+    - test -f "${PREFIX}/lib/libopenlibm${SHLIB_EXT}"              # [unix]
+    - if not exist "%LIBRARY_BIN%\\libopenlibm.dll" exit 1         # [win]
+    - if not exist "%LIBRARY_INC%\\openlibm\\openlibm.h" exit 1    # [win]
+    - if not exist "%LIBRARY_LIB%\\libopenlibm.lib" exit 1         # [win]
+    - if not exist "%LIBRARY_LIB%\\libopenlibm_static.lib" exit 1  # [win]
+    - echo on  # [win]
+    - cl /Tc test_openlibm.c /I %CONDA_PREFIX%\Library\include\openlibm /link /LIBPATH:"%CONDA_PREFIX%\Library\lib" libopenlibm_static.lib /out:test_openlibm.exe  # [win]
+    - test_openlibm.exe  # [win]
+    - ${CC} -o test_openlibm test_openlibm.c -I${CONDA_PREFIX}/include/openlibm -L${CONDA_PREFIX}/lib -lopenlibm ${CFLAGS} ${LDFLAGS}  # [unix]
+    - ./test_openlibm  # [unix]
 
 about:
   home: http://openlibm.org/
