@@ -1,6 +1,6 @@
 {% set name = "openlibm" %}
-{% set version = "0.6.0" %}
-{% set sha256 = "d45439093d1fd15e2ac3acf69955e462401c7a160d3330256cb4a86c51bdae28" %}
+{% set version = "0.7.0" %}
+{% set sha256 = "1699f773198018b55b12631db9c1801fe3ed191e618a1ee1be743f4570ae06a3" %}
 
 package:
   name: {{ name|lower }}
@@ -14,7 +14,7 @@ source:
     - 0001-no-CC-override.patch
 
 build:
-  number: 1001
+  number: 0
   skip: true  # [win and vc<14]
 
 requirements:
