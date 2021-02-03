@@ -1,6 +1,6 @@
 {% set name = "openlibm" %}
-{% set version = "0.7.0" %}
-{% set sha256 = "1699f773198018b55b12631db9c1801fe3ed191e618a1ee1be743f4570ae06a3" %}
+{% set version = "0.7.4" %}
+{% set sha256 = "eb585204d6c995691e5545ea4ffcb887c159bf05cc5ee1bbf92a6fcdde2fccae" %}
 
 package:
   name: {{ name|lower }}
@@ -46,7 +46,7 @@ about:
   home: http://openlibm.org/
   license: MIT, ISC, BSD 2-Clause
   license_file: LICENSE.md
-  summary: "High quality system independent, portable, open source libm implementation"
+  summary: High quality system independent, portable, open source libm implementation
   dev_url: https://github.com/JuliaLang/openlibm
 
 extra:
