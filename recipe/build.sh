@@ -15,7 +15,7 @@ if [[ "$target_platform" == osx-* ]]; then
     export USEGCC=0
     export USECLANG=1
     sed -i.bak "s/CC = clang/CC ?= clang/g" Make.inc
-elif [[ "$(uname)" == "Linux" ]]; then
+elif [[ "$target_platform" == linux-* ]]; then
     export USEGCC=1
     export USECLANG=0
 fi
