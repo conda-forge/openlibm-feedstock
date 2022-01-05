@@ -9,7 +9,7 @@ then
 elif [ "$ARCH" == "32" ]
 then
     export ARCH="i387"
-elif [ "$ARCH" == "64" and build_platform != target_platform ]
+elif [ "$target_platform" == "osx-arm64" ]
 then
     export ARCH="aarch64"
 fi
