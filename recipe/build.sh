@@ -9,6 +9,9 @@ then
 elif [ "$ARCH" == "32" ]
 then
     export ARCH="i387"
+elif [ "$ARCH" == "arm" ]
+then
+    export ARCH="aarch64"
 fi
 
 # Set compiler to use to match the system.
