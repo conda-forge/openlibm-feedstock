@@ -1,6 +1,6 @@
 {% set name = "openlibm" %}
-{% set version = "0.7.1" %}
-{% set sha256 = "d4b252b71c74571fe5b39d42dee03ccca4bb238827e6a2c9ba108dbca2d3e879" %}
+{% set version = "0.8.0" %}
+{% set sha256 = "03620768df4ca526a63dd675c6de95a5c9d167ff59555ce57a61c6bf49e400ee" %}
 
 package:
   name: {{ name|lower }}
@@ -10,8 +10,6 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/JuliaLang/openlibm/archive/v{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    - 0001-no-CC-override.patch
 
 build:
   number: 0
