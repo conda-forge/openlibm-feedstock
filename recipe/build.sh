@@ -11,7 +11,7 @@ then
     export ARCH="i387"
 elif [ "$target_platform" == "osx-arm64" ]
 then
-    export ARCH="aarch64"
+    export ARCH="arm"
 fi
 
 # Set compiler to use to match the system.
