@@ -5,7 +5,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/openlibm-feedst
 
 Home: http://openlibm.org/
 
-Package license: MIT AND ISC AND BSD 2-Clause
+Package license: MIT AND ISC AND BSD-2-Clause
 
 Summary: High quality system independent, portable, open source libm implementation
 

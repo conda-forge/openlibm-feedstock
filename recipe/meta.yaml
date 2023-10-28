@@ -105,7 +105,7 @@ outputs:
 
 about:
   home: http://openlibm.org/
-  license: MIT AND ISC AND BSD 2-Clause
+  license: MIT AND ISC AND BSD-2-Clause
   license_file: LICENSE.md
   summary: High quality system independent, portable, open source libm implementation
   dev_url: https://github.com/JuliaLang/openlibm
