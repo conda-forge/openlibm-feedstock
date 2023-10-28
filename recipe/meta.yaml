@@ -33,7 +33,8 @@ outputs:
     files:
       - include/openlibm  # [unix]
       - lib/pkgconfig/openlibm.pc  # [unix]
-      - lib/libopenlibm${SHLIB_EXT}  # [unix]
+      - lib/libopenlibm.so  # [linux]
+      - lib/libopenlibm.dylib  # [osx]
       - Library\\include\\openlibm  # [win]
       - Library\\lib\\pkgconfig\\openlibm.pc  # [win]
     requirements:
