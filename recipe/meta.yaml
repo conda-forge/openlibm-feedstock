@@ -1,8 +1,8 @@
 {% set name = "openlibm" %}
-{% set version = "0.8.1" %}
+{% set version = "0.8.2" %}
 {% set so_version = "4.0" %}
 {% set so_major_version = so_version.split('.')[0] %}
-{% set sha256 = "ba8a282ecd92d0033f5656bb20dfc6ea3fb83f90ba69291ac8f7beba42dcffcf" %}
+{% set sha256 = "7244f9aa468584744e260cef740d57d10eab6e9c05f62084f8f2ba457f4b4b1d" %}
 
 package:
   name: {{ name|lower }}-split
@@ -14,7 +14,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win]
 
 requirements:
@@ -64,7 +64,7 @@ outputs:
         - ./test_openlibm  # [unix]
 
   - name: libopenlibm{{ so_major_version }}  # [unix]
-  - name: libopenlibm                        # [win]
+  - name: libopenlibm  # [win]
     build:
       run_exports:
         - {{ pin_subpackage('libopenlibm' ~ so_major_version) }}  # [unix]
