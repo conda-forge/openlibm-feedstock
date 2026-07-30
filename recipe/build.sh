@@ -18,18 +18,25 @@ if [[ "$target_platform" == osx-* ]]; then
 elif [[ "$target_platform" == linux-* ]]; then
     export USEGCC=1
     export USECLANG=0
+    # openlibm's hand-written x86 assembly (.S) files don't mark the stack
+    # non-executable, so the linker leaves PT_GNU_STACK requesting one.
+    # glibc >= 2.41 and hardened kernels refuse to dlopen() such a library
+    # ("cannot enable executable stack as shared object requires"), which
+    # breaks every Julia release linking against this package
+    # (JuliaLang/julia#57250). Force the linker to mark the stack
+    # non-executable regardless of what individual objects request.
+    export LDFLAGS="${LDFLAGS} -Wl,-z,noexecstack"
 fi
 
 make prefix="${PREFIX}/"
 make install prefix="${PREFIX}/"
 
-# openlibm's hand-written x86 assembly (.S) files don't mark the stack
-# non-executable, so the linker leaves the PT_GNU_STACK header requesting
-# an executable stack. glibc >= 2.41 and hardened kernels refuse to
-# dlopen() such a library ("cannot enable executable stack as shared
-# object requires"), which breaks every Julia release that links against
-# this package (JuliaLang/julia#57250). Clear the flag on the objects we
-# actually ship.
 if [[ "$target_platform" == linux-* ]]; then
-    find "${PREFIX}/lib" -name 'libopenlibm.so*' -exec patchelf --clear-execstack {} \;
+    for lib in "${PREFIX}"/lib/libopenlibm.so.*; do
+        [[ -L "$lib" ]] && continue
+        if readelf -lW "$lib" | grep -q 'GNU_STACK.*RWE'; then
+            echo "$lib still requests an executable stack" >&2
+            exit 1
+        fi
+    done
 fi
