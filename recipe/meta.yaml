@@ -1,8 +1,8 @@
 {% set name = "openlibm" %}
-{% set version = "0.8.1" %}
+{% set version = "0.8.7" %}
 {% set so_version = "4.0" %}
 {% set so_major_version = so_version.split('.')[0] %}
-{% set sha256 = "ba8a282ecd92d0033f5656bb20dfc6ea3fb83f90ba69291ac8f7beba42dcffcf" %}
+{% set sha256 = "e328a1d59b94748b111e022bca6a9d2fc0481fb57d23c87d90f394b559d4f062" %}
 
 package:
   name: {{ name|lower }}-split
@@ -20,6 +20,7 @@ build:
 requirements:
   build:
     - {{ compiler("c") }}  # [not win]
+    - {{ stdlib("c") }}  # [not win]
     - {{ compiler("m2w64_c") }}  # [win]
     - make
 
@@ -40,6 +41,7 @@ outputs:
     requirements:
       build:
         - {{ compiler("c") }}  # [not win]
+        - {{ stdlib("c") }}  # [not win]
         - {{ compiler("m2w64_c") }}  # [win]
       run:
         - {{ pin_subpackage('libopenlibm' ~ so_major_version, exact=True) }}  # [unix]
@@ -79,6 +81,7 @@ outputs:
     requirements:
       build:
         - {{ compiler("c") }}  # [not win]
+        - {{ stdlib("c") }}  # [not win]
         - {{ compiler("m2w64_c") }}  # [win]
     test:
       commands:
@@ -96,6 +99,7 @@ outputs:
     requirements:
       build:
         - {{ compiler("c") }}  # [not win]
+        - {{ stdlib("c") }}  # [not win]
         - {{ compiler("m2w64_c") }}  # [win]
       run:
         - {{ pin_subpackage('openlibm', exact=True) }}
